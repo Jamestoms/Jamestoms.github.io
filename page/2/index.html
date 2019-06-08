@@ -109,6 +109,54 @@
 </article>
 
   
+    <article id="post-linux install nginx" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/26/linux install nginx/">centos7 使用yum安装nginx</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/09/26/linux install nginx/" class="article-date">
+  <time datetime="2018-09-25T16:00:00.000Z" itemprop="datePublished">2018-09-26</time>
+</a>
+    
+    
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-mac" itemprop="articleBody">
+      
+        <p>一、添加nginx仓库<br>新建文件</p>
+<pre><code>vim /etc/yum.repos.d/nginx.repo</code></pre><p>文件内容:</p>
+<pre><code>[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/7/$basearch/
+gpgcheck=0
+enabled=1</code></pre><p>安装<br>执行命令</p>
+<pre><code>yum install nginx</code></pre><p>启动nginx<br>    service nginx start<br>重启</p>
+<pre><code>service nginx restart</code></pre><p>访问linux服务器ip，默认开启80端口，ip后面不需要加上端口号，此时应该能看到<br>welcome to nginx 主页</p>
+<p>添加启动项<br>把Nginx加到系统启动项，这样每次开机的时候就自动启动了，使用下面的命令:</p>
+<pre><code>systemctl enable nginx</code></pre><p>如果页面没有出来，查看防火墙配置<br>vi /etc/sysconfig/iptables 添加下面内容<br>    -A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT（允许80端口通过防火墙）<br>    -A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT（mysql端口 允许3306端口通过防火墙）<br>然后重启防火墙：service iptables restart</p>
+<p>Nginx服务的配置根目录以及其配置<br>默认的网站根目录：<br>默认的网站根目录是/usr/share/nginx/html. 只要把文件放这里就可以访问了，这个主要是/etc/nginx/conf.d/default.conf在这配置的，你也可以自己修改，然后重启即可<br>服务模块配置：<br>任何其他的虚拟机模块配置你都可以在/etc/nginx/conf.d这个下面放置你的模块配置文件，重启之后就可以使用了。<br>Nginx全局配置<br>Nginx的全局配置文件位于/etc/nginx/nginx.conf. 你可以根据自己的喜好设置东西，比如你可以修改运行Nginx的用户等。<br>查看服务器上安装的Nginx版本号<br>    nginx -v<br>    nginx -V</p>
+<p>PS：<br>Nginx执行命令：/usr/sbin/nginx<br>配置文件：/etc/nginx/nginx.conf<br>默认配置文件：/etc/nginx/conf.d/default.conf<br>网页目录：/usr/share/nginx/html</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-javascript-array" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -153,54 +201,6 @@
   });
   return newArr;
 }</code></pre><p>原生js方法<br>    function uniqueArr2(arr) {<br>      const newArr = [];<br>      for (var i = 0; i &lt; arr.length; i++) {<br>        var flag = true;<br>        for (var j = 0; j &lt; newArr.length; j++) {<br>          if (arr[i].id == newArr[j].id) {<br>            flag = false;<br>          }<br>        }<br>        if (flag) {<br>          newArr.push(arr[i]);<br>        }<br>      }<br>      return newArr;<br>    }<br>setTimeout代替setInterval</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
-    <article id="post-linux install nginx" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/26/linux install nginx/">centos7 使用yum安装nginx</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2018/09/26/linux install nginx/" class="article-date">
-  <time datetime="2018-09-25T16:00:00.000Z" itemprop="datePublished">2018-09-26</time>
-</a>
-    
-    
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-mac" itemprop="articleBody">
-      
-        <p>一、添加nginx仓库<br>新建文件</p>
-<pre><code>vim /etc/yum.repos.d/nginx.repo</code></pre><p>文件内容:</p>
-<pre><code>[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/centos/7/$basearch/
-gpgcheck=0
-enabled=1</code></pre><p>安装<br>执行命令</p>
-<pre><code>yum install nginx</code></pre><p>启动nginx<br>    service nginx start<br>重启</p>
-<pre><code>service nginx restart</code></pre><p>访问linux服务器ip，默认开启80端口，ip后面不需要加上端口号，此时应该能看到<br>welcome to nginx 主页</p>
-<p>添加启动项<br>把Nginx加到系统启动项，这样每次开机的时候就自动启动了，使用下面的命令:</p>
-<pre><code>systemctl enable nginx</code></pre><p>如果页面没有出来，查看防火墙配置<br>vi /etc/sysconfig/iptables 添加下面内容<br>    -A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT（允许80端口通过防火墙）<br>    -A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT（mysql端口 允许3306端口通过防火墙）<br>然后重启防火墙：service iptables restart</p>
-<p>Nginx服务的配置根目录以及其配置<br>默认的网站根目录：<br>默认的网站根目录是/usr/share/nginx/html. 只要把文件放这里就可以访问了，这个主要是/etc/nginx/conf.d/default.conf在这配置的，你也可以自己修改，然后重启即可<br>服务模块配置：<br>任何其他的虚拟机模块配置你都可以在/etc/nginx/conf.d这个下面放置你的模块配置文件，重启之后就可以使用了。<br>Nginx全局配置<br>Nginx的全局配置文件位于/etc/nginx/nginx.conf. 你可以根据自己的喜好设置东西，比如你可以修改运行Nginx的用户等。<br>查看服务器上安装的Nginx版本号<br>    nginx -v<br>    nginx -V</p>
-<p>PS：<br>Nginx执行命令：/usr/sbin/nginx<br>配置文件：/etc/nginx/nginx.conf<br>默认配置文件：/etc/nginx/conf.d/default.conf<br>网页目录：/usr/share/nginx/html</p>
 
       
     </div>
