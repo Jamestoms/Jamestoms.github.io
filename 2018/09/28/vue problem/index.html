@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue scoped | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="scoped的好处、坑与解决办法我们假设把使用scoped的组件叫做模块私有组件，其他的未加scoped的叫做模块一般组件。通过查看DOM结构发现：vue通过在DOM结构以及css样式上加唯一不重复的标记，以保证唯一，达到样式私有化模块化的目的。 添加了scoped属性的组件，为了达到组件样式模块化，做了两个处理： 给HTML的DOM节点加一个不重复data属性(形如：data-v-19fca23">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue scoped">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/vue problem/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="scoped的好处、坑与解决办法我们假设把使用scoped的组件叫做模块私有组件，其他的未加scoped的叫做模块一般组件。通过查看DOM结构发现：vue通过在DOM结构以及css样式上加唯一不重复的标记，以保证唯一，达到样式私有化模块化的目的。 添加了scoped属性的组件，为了达到组件样式模块化，做了两个处理： 给HTML的DOM节点加一个不重复data属性(形如：data-v-19fca23">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T13:10:20.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue scoped">
+<meta name="twitter:description" content="scoped的好处、坑与解决办法我们假设把使用scoped的组件叫做模块私有组件，其他的未加scoped的叫做模块一般组件。通过查看DOM结构发现：vue通过在DOM结构以及css样式上加唯一不重复的标记，以保证唯一，达到样式私有化模块化的目的。 添加了scoped属性的组件，为了达到组件样式模块化，做了两个处理： 给HTML的DOM节点加一个不重复data属性(形如：data-v-19fca23">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-vue problem" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      vue scoped
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/09/28/vue problem/" class="article-date">
+  <time datetime="2018-09-27T16:00:00.000Z" itemprop="datePublished">2018-09-28</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>scoped的好处、坑与解决办法<br>我们假设把使用scoped的组件叫做模块私有组件，其他的未加scoped的叫做模块一般组件。通过查看DOM结构发现：vue通过在DOM结构以及css样式上加唯一不重复的标记，以保证唯一，达到样式私有化模块化的目的。</p>
+<p>添加了scoped属性的组件，为了达到组件样式模块化，做了两个处理：</p>
+<p>给HTML的DOM节点加一个不重复data属性(形如：data-v-19fca230)来表示他的唯一性<br>在每句css选择器的末尾（编译后的生成的css语句）加一个当前组件的data属性选择器（如[data-v-2311c06a]）来私有化样式<br>如果不使用scoped如何解决样式全局污染？<br>推荐使用scoped推动组件私有化，文章所提到的不使用仅出现在已有UI库的样式覆盖上（当然人家用了scoped 那就很难办了）。<br>首先，解决组件样式全局污染，也就是我们在这里不使用scoped 覆盖了样式，那么我们在其他地方调用该组件就会被覆盖。那么我们在使用组件的时候对组件给一个类名 或者其他甄别属性（id），覆盖样式就针对该类名进行重写样式。<br>其次，解决其他样式全局污染，如果我们通过：</p>
+<pre><code>&lt;style lang=&quot;less&quot;&gt;
+    @import &quot;./test.less&quot;;
+&lt;/style&gt;123</code></pre><p>引进样式，那么不使用scoped ，”./test.less” 中的其他类名样式可能会污染全局，我这里用一个比较笨的方法处理：在模板中使用两次 标签：</p>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+    @import &quot;./test.less&quot;;
+&lt;/style&gt;
+&lt;style lang=&quot;less&quot;&gt;
+    //你的覆盖样式
+&lt;/style&gt;</code></pre><p>这样既覆盖了样式，其他样式不会被覆盖到全局(注意两个标签的顺序)。</p>
+<p>官网 vue-loader 中提到每个vue模板中可以有多个标签，所以上面的写法是没有问题的。</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2018/10/14/nodejs forever/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            使用forever让node.js持久运行
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2018/09/28/linux commd/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">linux 命令使用记录</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>

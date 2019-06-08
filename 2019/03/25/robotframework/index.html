@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>RobotFramework | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="Run Keyword If语句${image_number}    ${label_count}    Run Keyword If  &amp;apos;${type}&amp;apos;==&amp;apos;image_classification&amp;apos;    Set Variable    420    10                                     ...  ELSE IF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RobotFramework">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/robotframework/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Run Keyword If语句${image_number}    ${label_count}    Run Keyword If  &amp;apos;${type}&amp;apos;==&amp;apos;image_classification&amp;apos;    Set Variable    420    10                                     ...  ELSE IF">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T13:09:14.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RobotFramework">
+<meta name="twitter:description" content="Run Keyword If语句${image_number}    ${label_count}    Run Keyword If  &amp;apos;${type}&amp;apos;==&amp;apos;image_classification&amp;apos;    Set Variable    420    10                                     ...  ELSE IF">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-robotframework" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      RobotFramework
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/03/25/robotframework/" class="article-date">
+  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h1 id="Run-Keyword-If语句"><a href="#Run-Keyword-If语句" class="headerlink" title="Run Keyword If语句"></a>Run Keyword If语句</h1><pre><code>${image_number}    ${label_count}    Run Keyword If  &apos;${type}&apos;==&apos;image_classification&apos;    Set Variable    420    10
+                                    ...  ELSE IF    &apos;${type}&apos;==&apos;object_detection&apos;    Set Variable    20    13
+                                    ...  ELSE IF    &apos;${type}&apos;==&apos;instance_segmentation&apos;    Set Variable    500    3</code></pre><p>如上，如果满足条件为两个变量赋值<br>语法为：<br>    Run Keyword If   条件   关键字1<br>    … ELSE IF   条件   关键字2<br>    … ELSE   条件   关键字3</p>
+<p>关键问题：</p>
+<ol>
+<li>ELSE IF必须为大写！！！</li>
+<li>ELSE前面的三个点必须跟上一行的Run对齐！！！</li>
+</ol>
+<h1 id="RobotFramework关键字"><a href="#RobotFramework关键字" class="headerlink" title="RobotFramework关键字"></a>RobotFramework关键字</h1><p><a href="http://robotframework.org/Selenium2Library/Selenium2Library-1.8.0.html" target="_blank" rel="noopener">官方文档</a><br><strong>* Keywords *</strong><br>    Add Cookie<br>    Add Location Strategy<br>    Alert Should Be Present<br>    Assign Id To Element<br>    Capture Page Screenshot<br>    Checkbox Should Be Selected<br>    Checkbox Should Not Be Selected<br>    Choose Cancel On Next Confirmation<br>    Choose File<br>    Choose Ok On Next Confirmation<br>    Clear Element Text<br>    Click Button<br>    Click Element<br>    Click Element At Coordinates<br>    Click Image<br>    Click Link<br>    Close All Browsers<br>    Close Browser<br>    Close Window<br>    Confirm Action<br>    Create Webdriver<br>    Current Frame Contains<br>    Current Frame Should Not Contain<br>    Delete All Cookies<br>    Delete Cookie<br>    Dismiss Alert<br>    Double Click Element<br>    Drag And Drop<br>    Drag And Drop By Offset<br>    Element Should Be Disabled<br>    Element Should Be Enabled<br>    Element Should Be Visible<br>    Element Should Contain<br>    Element Should Not Be Visible<br>    Element Should Not Contain<br>    Element Text Should Be<br>    Execute Async Javascript<br>    Execute Javascript<br>    Focus<br>    Frame Should Contain<br>    Get Alert Message<br>    Get All Links<br>    Get Cookie Value<br>    Get Cookies<br>    Get Element Attribute<br>    Get Element Size<br>    Get Horizontal Position<br>    Get List Items<br>    Get Location<br>    Get Matching Xpath Count<br>    Get Selected List Label<br>    Get Selected List Labels<br>    Get Selected List Value<br>    Get Selected List Values<br>    Get Selenium Implicit Wait<br>    Get Selenium Speed<br>    Get Selenium Timeout<br>    Get Source<br>    Get Table Cell<br>    Get Text<br>    Get Title<br>    Get Value<br>    Get Vertical Position<br>    Get Webelement<br>    Get Webelements<br>    Get Window Identifiers<br>    Get Window Names<br>    Get Window Position<br>    Get Window Size<br>    Get Window Titles<br>    Go Back<br>    Go To<br>    Input Password<br>    Input Text<br>    Input Text Into Prompt<br>    List Selection Should Be<br>    List Should Have No Selections<br>    List Windows<br>    Location Should Be<br>    Location Should Contain<br>    Locator Should Match X Times<br>    Log Location<br>    Log Source<br>    Log Title<br>    Maximize Browser Window<br>    Mouse Down<br>    Mouse Down On Image<br>    Mouse Down On Link<br>    Mouse Out<br>    Mouse Over<br>    Mouse Up<br>    Open Browser<br>    Open Context Menu<br>    Page Should Contain<br>    Page Should Contain Button<br>    Page Should Contain Checkbox<br>    Page Should Contain Element<br>    Page Should Contain Image<br>    Page Should Contain Link<br>    Page Should Contain List<br>    Page Should Contain Radio Button<br>    Page Should Contain Textfield<br>    Page Should Not Contain<br>    Page Should Not Contain Button<br>    Page Should Not Contain Checkbox<br>    Page Should Not Contain Element<br>    Page Should Not Contain Image<br>    Page Should Not Contain Link<br>    Page Should Not Contain List<br>    Page Should Not Contain Radio Button<br>    Page Should Not Contain Textfield<br>    Press Key<br>    Radio Button Should Be Set To<br>    Radio Button Should Not Be Selected<br>    Register Keyword To Run On Failure<br>    Reload Page<br>    Remove Location Strategy<br>    Select All From List<br>    Select Checkbox<br>    Select Frame<br>    Select From List<br>    Select From List By Index<br>    Select From List By Label<br>    Select From List By Value<br>    Select Radio Button<br>    Select Window<br>    Set Browser Implicit Wait<br>    Set Screenshot Directory<br>    Set Selenium Implicit Wait<br>    Set Selenium Speed<br>    Set Selenium Timeout<br>    Set Window Position<br>    Set Window Size<br>    Simulate<br>    Submit Form<br>    Switch Browser<br>    Table Cell Should Contain<br>    Table Column Should Contain<br>    Table Footer Should Contain<br>    Table Header Should Contain<br>    Table Row Should Contain<br>    Table Should Contain<br>    Textarea Should Contain<br>    Textarea Value Should Be<br>    Textfield Should Contain<br>    Textfield Value Should Be<br>    Title Should Be<br>    Unselect Checkbox<br>    Unselect Frame<br>    Unselect From List<br>    Unselect From List By Index<br>    Unselect From List By Label<br>    Unselect From List By Value<br>    Wait For Condition<br>    Wait Until Element Contains<br>    Wait Until Element Does Not Contain<br>    Wait Until Element Is Enabled<br>    Wait Until Element Is Not Visible<br>    Wait Until Element Is Visible<br>    Wait Until Page Contains<br>    Wait Until Page Contains Element<br>    Wait Until Page Does Not Contain<br>    Wait Until Page Does Not Contain Element<br>    Xpath Should Match X Times</p>
+<h1 id="BuiltIn关键字"><a href="#BuiltIn关键字" class="headerlink" title="BuiltIn关键字"></a>BuiltIn关键字</h1><p>官方文档 <a href="http://robotframework.org/robotframework/latest/libraries/BuiltIn.html)" target="_blank" rel="noopener">http://robotframework.org/robotframework/latest/libraries/BuiltIn.html)</a></p>
+<pre><code>Call Method
+Catenate
+Comment
+Continue For Loop
+Continue For Loop If
+Convert To Binary
+Convert To Boolean
+Convert To Bytes
+Convert To Hex
+Convert To Integer
+Convert To Number
+Convert To Octal
+Convert To String
+Create Dictionary
+Create List
+Evaluate
+Exit For Loop
+Exit For Loop If
+Fail
+Fatal Error
+Get Count
+Get Length
+Get Library Instance
+Get Time
+Get Variable Value
+Get Variables
+Import Library
+Import Resource
+Import Variables
+Keyword Should Exist
+Length Should Be
+Log
+Log Many
+Log To Console
+Log Variables
+No Operation
+Pass Execution
+Pass Execution If
+Regexp Escape
+Reload Library
+Remove Tags
+Repeat Keyword
+Replace Variables
+Return From Keyword
+Return From Keyword If
+Run Keyword
+Run Keyword And Continue On Failure
+Run Keyword And Expect Error
+Run Keyword And Ignore Error
+Run Keyword And Return
+Run Keyword And Return If
+Run Keyword And Return Status
+Run Keyword If
+Run Keyword If All Critical Tests Passed
+Run Keyword If All Tests Passed
+Run Keyword If Any Critical Tests Failed
+Run Keyword If Any Tests Failed
+Run Keyword If Test Failed
+Run Keyword If Test Passed
+Run Keyword If Timeout Occurred
+Run Keyword Unless
+Run Keywords
+Set Global Variable
+Set Library Search Order
+Set Log Level
+Set Suite Documentation
+Set Suite Metadata
+Set Suite Variable
+Set Tags
+Set Task Variable
+Set Test Documentation
+Set Test Message
+Set Test Variable
+Set Variable
+Set Variable If
+Should Be Empty
+Should Be Equal
+Should Be Equal As Integers
+Should Be Equal As Numbers
+Should Be Equal As Strings
+Should Be True
+Should Contain
+Should Contain Any
+Should Contain X Times
+Should End With
+Should Match
+Should Match Regexp
+Should Not Be Empty
+Should Not Be Equal
+Should Not Be Equal As Integers
+Should Not Be Equal As Numbers
+Should Not Be Equal As Strings
+Should Not Be True
+Should Not Contain
+Should Not Contain Any
+Should Not End With
+Should Not Match
+Should Not Match Regexp
+Should Not Start With
+Should Start With
+Sleep
+Variable Should Exist
+Variable Should Not Exist
+Wait Until Keyword Succeeds</code></pre>
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2019/04/09/python/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            python
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2019/03/25/nodejs-download-images/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Javascript从json文件获取图片地址下载图片到本地</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>

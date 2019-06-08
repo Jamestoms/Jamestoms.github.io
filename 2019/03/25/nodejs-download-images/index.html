@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Javascript从json文件获取图片地址下载图片到本地 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="var http = require(&amp;apos;http&amp;apos;),fs = require(&amp;apos;fs&amp;apos;); var imgs = require(&amp;apos;./face_detection.json&amp;apos;);  //保存图片地址的json文件 imgs.forEach((el,index) =&amp;gt; {   var name = &amp;apos;&amp;apos;;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript从json文件获取图片地址下载图片到本地">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/nodejs-download-images/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="var http = require(&amp;apos;http&amp;apos;),fs = require(&amp;apos;fs&amp;apos;); var imgs = require(&amp;apos;./face_detection.json&amp;apos;);  //保存图片地址的json文件 imgs.forEach((el,index) =&amp;gt; {   var name = &amp;apos;&amp;apos;;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T13:02:55.093Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript从json文件获取图片地址下载图片到本地">
+<meta name="twitter:description" content="var http = require(&amp;apos;http&amp;apos;),fs = require(&amp;apos;fs&amp;apos;); var imgs = require(&amp;apos;./face_detection.json&amp;apos;);  //保存图片地址的json文件 imgs.forEach((el,index) =&amp;gt; {   var name = &amp;apos;&amp;apos;;">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      Javascript从json文件获取图片地址下载图片到本地
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
+  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
+var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
+imgs.forEach((el,index) =&gt; {
+  var name = &apos;&apos;;
+  if(el.content.indexOf(&apos;png&apos;) != -1){
+    name = index+&apos;.png&apos;;
+  }else{
+    name = index+&apos;.jpeg&apos;;
+  }
+  http.get(el.content,function(req,res){
+    var imgData = &apos;&apos;;
+    req.setEncoding(&apos;binary&apos;);
+    req.on(&apos;data&apos;,function(chunk){
+      imgData += chunk;
+    })
+    req.on(&apos;end&apos;,function(){
+      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
+        if(err){console.log(&apos;保存出错！&apos;)}else{
+          console.log(&apos;保存成功!&apos;)
+        }
+      })
+    })
+  })
+
+});</code></pre>
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2019/03/25/robotframework/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            RobotFramework
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2019/03/08/Javascript_vanceded_techniques/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Javascript高级函数</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>

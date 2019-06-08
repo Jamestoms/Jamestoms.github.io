@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>react | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="构建react组件的三种方式： React.createClass ES6 classes 无状态函数  示例：创建button组件元素React.createClass const Button = React.createClass({   getDefaultProps(){     return {       color: &amp;apos;blue&amp;apos;,       text: &amp;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/react/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="构建react组件的三种方式： React.createClass ES6 classes 无状态函数  示例：创建button组件元素React.createClass const Button = React.createClass({   getDefaultProps(){     return {       color: &amp;apos;blue&amp;apos;,       text: &amp;a">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T13:08:12.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react">
+<meta name="twitter:description" content="构建react组件的三种方式： React.createClass ES6 classes 无状态函数  示例：创建button组件元素React.createClass const Button = React.createClass({   getDefaultProps(){     return {       color: &amp;apos;blue&amp;apos;,       text: &amp;a">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-react" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      react
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/03/01/react/" class="article-date">
+  <time datetime="2019-02-28T16:00:00.000Z" itemprop="datePublished">2019-03-01</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <h2 id="构建react组件的三种方式："><a href="#构建react组件的三种方式：" class="headerlink" title="构建react组件的三种方式："></a>构建react组件的三种方式：</h2><ul>
+<li>React.createClass</li>
+<li>ES6 classes</li>
+<li>无状态函数</li>
+</ul>
+<p>示例：创建button组件元素<br>React.createClass</p>
+<pre><code>const Button = React.createClass({
+  getDefaultProps(){
+    return {
+      color: &apos;blue&apos;,
+      text: &apos;Confirm&apos;
+    };
+  },
+  render(){
+    const { color, text } = this.props;
+    return (
+      &lt;button className={btn btn-${color}}&gt;
+        &lt;em&gt;{text}&lt;/em&gt;
+      &lt;/button&gt;
+    )
+  }
+});</code></pre><p>当调用button组件时只需要使用<buton>,就可以被解析成React.createClass(Button)方法来创建Button实例。</buton></p>
+<p>ES6 classes</p>
+<pre><code>import React, { Component } from &apos;react&apos;;
+　
+class Button extends Component {
+  constructor(props) {
+    super(props);
+  }
+　
+  static defaultProps = {
+    color: &apos;blue&apos;,
+    text: &apos;Confirm&apos;,
+  };
+　
+  render() {
+    const { color, text } = this.props;
+
+    return (
+      &lt;button className={btn btn-${color}}&gt;
+        &lt;em&gt;{text}&lt;/em&gt;
+      &lt;/button&gt;
+    );
+  }
+}</code></pre><p>无状态函数</p>
+<pre><code>function Button({ color = &apos;blue&apos;, text = &apos;Confirm&apos; }) {
+  return (
+    &lt;button className={btn btn-${color}}&gt;
+      &lt;em&gt;{text}&lt;/em&gt;
+    &lt;/button&gt;
+  );
+}</code></pre><p>无状态组件只传入 props 和 context 两个参数；也就是说，它不存在 state ，也没有生命周期方法，组件本身即上面两种 React 组件构建方法中的 render 方法。不过，像 propTypes 和 defaultProps 还是可以通过向方法设置静态属性来实现的。<br>在适合的情况下，我们都应该且必须使用无状态组件。无状态组件不像上述两种方法在调用时会创建新实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。</p>
+<h2 id="事件处理函数中的this绑定"><a href="#事件处理函数中的this绑定" class="headerlink" title="事件处理函数中的this绑定"></a>事件处理函数中的this绑定</h2><ul>
+<li><p>bind方法</p>
+<p>  import React, { Component } from ‘react’;<br>  　<br>  class App extends Component {</p>
+<pre><code>handleClick(e, arg) {
+  console.log(e, arg);
+}</code></pre><p>  　 render() {</p>
+<pre><code>  // 通过bind方法实现，可以传递参数
+  return &lt;button onClick={this.handleClick.bind(this, &apos;test&apos;)}&gt;Test&lt;/button&gt;;
+}</code></pre><p>  }</p>
+<p>使用双冒号语法<br>  import React, { Component } from ‘react’;<br>　
+  class App extends Component {</p>
+<pre><code>handleClick(e) {
+  console.log(e);
+}</code></pre><p>  　</p>
+<pre><code>render() {
+  return &lt;button onClick={::this.handleClick}&gt;Test&lt;/button&gt;;
+}</code></pre><p>  }</p>
+</li>
+<li><p>构造器内声明<br>在组件的构造器内完成了 this 的绑定，这种绑定方式的好处在于仅需要进行一次绑定，而不需要每次调用事件监听器时去执行绑定操作：</p>
+<p>  import React, { Component } from ‘react’;<br>　
+  class App extends Component {</p>
+<pre><code>constructor(props) {
+  super(props);
+
+  thishandleClick = this.handleClick.bind(this);
+}</code></pre><p>  　</p>
+<pre><code>handleClick(e) {
+  console.log(e);
+}
+
+render() {
+  return &lt;button onClick={this.handleClick}&gt;Test&lt;/button&gt;;
+}</code></pre><p>  }</p>
+</li>
+<li><p>箭头函数<br>箭头函数不仅是函数的“语法糖”，它还自动绑定了定义此函数作用域的 this ，因此我们不需要再对它使用 bind 方法。比如，以下方式就能运行：</p>
+<p>  import React, { Component } from ‘react’;<br>　
+  class App extends Component {</p>
+<pre><code>const handleClick = (e) =&gt; {
+  console.log(e);
+};</code></pre><p>  　</p>
+<pre><code>render() {
+  return &lt;button onClick={this.handleClick}&gt;Test&lt;/button&gt;;
+}</code></pre><p>  }</p>
+<p>或者</p>
+<p>  import React, { Component } from ‘react’;<br>　
+  class App extends Component {</p>
+<pre><code>handleClick(e) {
+  console.log(e);
+}</code></pre><p>  　</p>
+<pre><code>render() {
+  return &lt;button onClick={() =&gt; this.handleClick()}&gt;Test&lt;/button&gt;
+}</code></pre><p>  }</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2019/03/08/Javascript_vanceded_techniques/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            Javascript高级函数
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2018/10/14/nodejs forever/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">使用forever让node.js持久运行</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>

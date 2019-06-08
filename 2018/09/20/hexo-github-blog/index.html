@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>使用hexo+github搭建自己的个人博客 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="想要有一个自己的博客，又不想到各类网站注册账号，于是想起来可以使用hexo+github搭建自己的博客，以下是个人搭建博客的过程步骤 工具准备 一个github账号 nodejs 安装教程百度一大堆，这里就不写了。。。 git 同上 hexo (npm install hexo -g) 博客原文使用markdown编写的，所以得会使用markdown语法(百度一下就会，很简单)  查看原教程点这里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo+github搭建自己的个人博客">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/hexo-github-blog/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="想要有一个自己的博客，又不想到各类网站注册账号，于是想起来可以使用hexo+github搭建自己的博客，以下是个人搭建博客的过程步骤 工具准备 一个github账号 nodejs 安装教程百度一大堆，这里就不写了。。。 git 同上 hexo (npm install hexo -g) 博客原文使用markdown编写的，所以得会使用markdown语法(百度一下就会，很简单)  查看原教程点这里">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T13:48:32.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用hexo+github搭建自己的个人博客">
+<meta name="twitter:description" content="想要有一个自己的博客，又不想到各类网站注册账号，于是想起来可以使用hexo+github搭建自己的博客，以下是个人搭建博客的过程步骤 工具准备 一个github账号 nodejs 安装教程百度一大堆，这里就不写了。。。 git 同上 hexo (npm install hexo -g) 博客原文使用markdown编写的，所以得会使用markdown语法(百度一下就会，很简单)  查看原教程点这里">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-hexo-github-blog" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      使用hexo+github搭建自己的个人博客
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/09/20/hexo-github-blog/" class="article-date">
+  <time datetime="2018-09-20T13:07:25.000Z" itemprop="datePublished">2018-09-20</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>想要有一个自己的博客，又不想到各类网站注册账号，于是想起来可以使用hexo+github搭建自己的博客，以下是个人搭建博客的过程步骤</p>
+<h1 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h1><ul>
+<li>一个github账号</li>
+<li>nodejs 安装教程百度一大堆，这里就不写了。。。</li>
+<li>git 同上</li>
+<li>hexo (npm install hexo -g)</li>
+<li>博客原文使用markdown编写的，所以得会使用markdown语法(百度一下就会，很简单)</li>
+</ul>
+<p>查看原教程点这里 <a href="https://www.cnblogs.com/dantefung/p/d8c48ba8030bcab7cfc364d423186fee.html" target="_blank" rel="noopener">https://www.cnblogs.com/dantefung/p/d8c48ba8030bcab7cfc364d423186fee.html</a></p>
+<h1 id="开始搭建博客"><a href="#开始搭建博客" class="headerlink" title="开始搭建博客"></a>开始搭建博客</h1><p>随意在哪里打开git bash(前提是环境变量配置好)，然后执行</p>
+<pre><code>mkdir blog
+cd blog
+hexo init
+npm install</code></pre><p>现在博客已经可以使用了，执行</p>
+<pre><code>hexo g</code></pre><p>自动编译markdown文件<br>然后执行</p>
+<pre><code>hexo s</code></pre><p>访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 即可看到你的博客。</p>
+<h1 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h1><ul>
+<li>新建一个仓库，名称为你的github账户名.github.io</li>
+<li>例如：giuthub账户名为xxx，则仓库命名为xxx.github.io</li>
+<li>进入仓库，点击setting</li>
+<li>往下滑，找到GitHub Pages，点击下面的Choose a theme</li>
+<li>先随便选一个主题(后面可以换更好的)，点击select theme，按照提示确认提交，会合到master分支上去<br>现在在浏览器访问XXX.github.io已经可以看到一个初步的博客了</li>
+</ul>
+<p>现在，复制你这个仓库的https链接，打开blog文件夹，编辑里面的_config.yml文件，在文件最后更改(添加)以下内容</p>
+<pre><code>deploy:
+  type: git
+  repository: 刚才让你复制的仓库连接
+  branch: master</code></pre><p>现在回到git bash窗口，执行以下命令</p>
+<pre><code>npm install hexo-deployer-git --save //这是为了解决hexo新版本的部署问题
+hexo g //编译markdown文件，重新生成博客
+hexo d //将本地blog部署到github仓库</code></pre><p>再次访问xxx.github.io,可以看到页面的变化了</p>
+<p>不喜欢这个主题？可以，换！<br>主题获取 <a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a> 这是GitHub上有人收集的主题仓库<br>这里有很多主题，点进去预览，选择一个你喜欢的，使用git clone下来或者直接下载压缩包来使用都可以，最后反正都是把下载来的文件夹放到blog文件夹下的theme文件夹里面，然后修改blog文件夹下面的_config.yml文件，找到theme字段，把原来的改成刚才你下载的文件夹名称<br>再次执行</p>
+<pre><code>hexo g
+hexo d</code></pre><p>再次访问xxx.github.io<br>现在你可以看到最新的主题了</p>
+<h1 id="编写博客与更新"><a href="#编写博客与更新" class="headerlink" title="编写博客与更新"></a>编写博客与更新</h1><p>在blog文件夹下面有个source文件夹，里面有个_posts文件夹，里面存的就是markdown文件，博文由此编译而来<br>新增博文：新建.md文件，格式参照原来里面的那个<br>修改文件、新增文件后保存，在blog文件夹打开git bash<br>执行</p>
+<pre><code>hexo g
+hexo d</code></pre><p>现在博客已经更新了(提交有一定延迟，等一会儿在刷新博客页面))</p>
+<p>至此，博客搭建完成。</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2018/09/26/javascript-array/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            笔记整理
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>

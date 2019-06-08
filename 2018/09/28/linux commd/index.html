@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>linux 命令使用记录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="后台方式启动mongodbb服务 mongod -f /usr/local/src/mongodb/data/cong/mongod.confLinux中如何让命令在后台运行(切换到后台，关闭shell服务也会断开)在下达的命令后面加上&amp;amp;，就可以使该命令在后台进行工作，这样做最大的好处就是不怕被ctrl+c这个中断指令所中断。那大家可能又要问了，在后台执行的程序怎么使它恢复到前台来运行呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 命令使用记录">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/linux commd/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="后台方式启动mongodbb服务 mongod -f /usr/local/src/mongodb/data/cong/mongod.confLinux中如何让命令在后台运行(切换到后台，关闭shell服务也会断开)在下达的命令后面加上&amp;amp;，就可以使该命令在后台进行工作，这样做最大的好处就是不怕被ctrl+c这个中断指令所中断。那大家可能又要问了，在后台执行的程序怎么使它恢复到前台来运行呢？">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T12:59:21.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux 命令使用记录">
+<meta name="twitter:description" content="后台方式启动mongodbb服务 mongod -f /usr/local/src/mongodb/data/cong/mongod.confLinux中如何让命令在后台运行(切换到后台，关闭shell服务也会断开)在下达的命令后面加上&amp;amp;，就可以使该命令在后台进行工作，这样做最大的好处就是不怕被ctrl+c这个中断指令所中断。那大家可能又要问了，在后台执行的程序怎么使它恢复到前台来运行呢？">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-linux commd" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      linux 命令使用记录
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2018/09/28/linux commd/" class="article-date">
+  <time datetime="2018-09-27T16:00:00.000Z" itemprop="datePublished">2018-09-28</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>后台方式启动mongodbb服务</p>
+<pre><code>mongod -f /usr/local/src/mongodb/data/cong/mongod.conf</code></pre><p>Linux中如何让命令在后台运行(切换到后台，关闭shell服务也会断开)<br>在下达的命令后面加上&amp;，就可以使该命令在后台进行工作，这样做最大的好处就是不怕被ctrl+c这个中断指令所中断。<br>那大家可能又要问了，在后台执行的程序怎么使它恢复到前台来运行呢？很简单，只用执行fg这个命令，就可以了。<br>可能有些同学又要问了，我现在已经在前台运行的命令，我能把它放到后台去运行么？当然可以了，只要执行ctrl+z就可以做到了。是不是很赞啊！<br>说到这里可能有些同学又要问了，如果我有多个进程在后台运行，那如何恢复到前台来执行呢？这时候就要用到jobs这个命令了，通过jobs这个命令，能够列出所有在后台执行的进程，那个中括号（[ ]）里面的数字就是 jobs 的代号啰 ，通过fg %number 就可以恢复指定的后台进程。<br>使用nohup让程序在远程主机后台运行。Unix/Linux下一般比如想让某个程序在后台运行，很多都是使用 &amp; 在程序结尾来让程序自动运行。但是如果终端关闭，那么程序也会被关闭。但是为了能够后台运行，那么我们就可以使用nohup这个命令，比如我们有个test.php需要在后台运行，并且希望在后台能够定期运行，那么就使用nohup：<br>    nohup /root/test.php &amp;<br>提示：<br>[~]$ appending output to nohup.out 证明运行成功，同时把程序运行的输出信息放到当前目录的 nohup.out 文件中去。<br>附：nohup命令参考 nohup 命令 用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [ &amp; ]<br>描述：nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所<br>有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 […]<br>后台运行的两个命令 &amp; 和 ctr+z<br>一开始就+“&amp;”具体方法是： [命令]空格[&amp;]<br>比如：<br>    [root@pcmxexweb etc]# find / -name xml &amp;<br>这样，这个查找程序就会在后台运行。它运行的同时不影响你干别的事情。<br>但是有的时候忘记了在命令之后加上„&amp;‟符号，又不愿意停下此命令重新改写。这是可<br>以按[ctrl+z]，把当前程序切入后台。<br>但是要注意此时在后台的这个程序是处于 Stopped 状态（注意看上面最后一行）。<br>用jobs查看下后台运行程序。<br>用fg %[编号]切回前台</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2018/09/28/vue problem/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            vue scoped
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2018/09/26/linux install nginx/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">centos7 使用yum安装nginx</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>
