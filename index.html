@@ -39,7 +39,7 @@
 </head>
 </html>
 <body>
-  <div id="fullpage" class="mobile-nav-right">
+  <div id="fullpage" class="mobile-nav-left">
     
       <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
     
@@ -47,7 +47,7 @@
       <header id="header">
   <div id="nav-toggle" class="nav-toggle"></div>
   <div class="head-box global-width">
-    <nav class="nav-box nav-right">
+    <nav class="nav-box nav-left">
       
         <a class="nav-item" href="/" title>首页</a>
       
@@ -84,7 +84,7 @@
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><ol>
 <li>5种简单数据类型</li>
@@ -157,7 +157,7 @@
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <p>打包方式有命令行和配置文件方式，主要用配置文件方式</p>
 <h1 id="配置选项"><a href="#配置选项" class="headerlink" title="配置选项"></a>配置选项</h1><ul>
@@ -244,7 +244,7 @@ new webpack.ProvidePlugin({
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <ol>
 <li>props和$emit<br>父组件向子组件传递数据是通过prop传递的，子组件传递数据给父组件是通过$emit触发事件来做到的。</li>
@@ -304,7 +304,7 @@ new webpack.ProvidePlugin({
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><ul>
 <li>整数</li>
@@ -516,65 +516,6 @@ z = C</code></pre><p>因此，列表生成式也可以使用两个变量来生�
 </article>
 
   
-    <article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
-  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
-</a>
-    
-    
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
-var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
-imgs.forEach((el,index) =&gt; {
-  var name = &apos;&apos;;
-  if(el.content.indexOf(&apos;png&apos;) != -1){
-    name = index+&apos;.png&apos;;
-  }else{
-    name = index+&apos;.jpeg&apos;;
-  }
-  http.get(el.content,function(req,res){
-    var imgData = &apos;&apos;;
-    req.setEncoding(&apos;binary&apos;);
-    req.on(&apos;data&apos;,function(chunk){
-      imgData += chunk;
-    })
-    req.on(&apos;end&apos;,function(){
-      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
-        if(err){console.log(&apos;保存出错！&apos;)}else{
-          console.log(&apos;保存成功!&apos;)
-        }
-      })
-    })
-  })
-
-});</code></pre>
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
     <article id="post-robotframework" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -598,7 +539,7 @@ imgs.forEach((el,index) =&gt; {
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <h1 id="Run-Keyword-If语句"><a href="#Run-Keyword-If语句" class="headerlink" title="Run Keyword If语句"></a>Run Keyword If语句</h1><pre><code>${image_number}    ${label_count}    Run Keyword If  &apos;${type}&apos;==&apos;image_classification&apos;    Set Variable    420    10
                                     ...  ELSE IF    &apos;${type}&apos;==&apos;object_detection&apos;    Set Variable    20    13
@@ -723,6 +664,65 @@ Wait Until Keyword Succeeds</code></pre>
 </article>
 
   
+    <article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
+  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+    
+    
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
+      
+        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
+var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
+imgs.forEach((el,index) =&gt; {
+  var name = &apos;&apos;;
+  if(el.content.indexOf(&apos;png&apos;) != -1){
+    name = index+&apos;.png&apos;;
+  }else{
+    name = index+&apos;.jpeg&apos;;
+  }
+  http.get(el.content,function(req,res){
+    var imgData = &apos;&apos;;
+    req.setEncoding(&apos;binary&apos;);
+    req.on(&apos;data&apos;,function(chunk){
+      imgData += chunk;
+    })
+    req.on(&apos;end&apos;,function(){
+      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
+        if(err){console.log(&apos;保存出错！&apos;)}else{
+          console.log(&apos;保存成功!&apos;)
+        }
+      })
+    })
+  })
+
+});</code></pre>
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-Javascript_vanceded_techniques" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -746,7 +746,7 @@ Wait Until Keyword Succeeds</code></pre>
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <h1 id="检测数组、函数、正则"><a href="#检测数组、函数、正则" class="headerlink" title="检测数组、函数、正则"></a>检测数组、函数、正则</h1><pre><code>function isArray(value){
   return Object.prototype.toString.call(value) == &apos;[object Array]&apos;;
@@ -848,7 +848,7 @@ this.getArea = function(){
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <h2 id="构建react组件的三种方式："><a href="#构建react组件的三种方式：" class="headerlink" title="构建react组件的三种方式："></a>构建react组件的三种方式：</h2><ul>
 <li>React.createClass</li>
@@ -989,7 +989,7 @@ render() {
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <pre><code>npm install forever -g #安装
 forever start app.js #启动应用
@@ -1038,7 +1038,7 @@ forever restartall #重启所有应用</code></pre><h2 id="输出日志和错误
 
   <div class="article-inner">
     
-    <div class="article-content article-content-cloud" itemprop="articleBody">
+    <div class="article-content article-content-doorframe" itemprop="articleBody">
       
         <p>后台方式启动mongodbb服务</p>
 <pre><code>mongod -f /usr/local/src/mongodb/data/cong/mongod.conf</code></pre><p>Linux中如何让命令在后台运行(切换到后台，关闭shell服务也会断开)<br>在下达的命令后面加上&amp;，就可以使该命令在后台进行工作，这样做最大的好处就是不怕被ctrl+c这个中断指令所中断。<br>那大家可能又要问了，在后台执行的程序怎么使它恢复到前台来运行呢？很简单，只用执行fg这个命令，就可以了。<br>可能有些同学又要问了，我现在已经在前台运行的命令，我能把它放到后台去运行么？当然可以了，只要执行ctrl+z就可以做到了。是不是很赞啊！<br>说到这里可能有些同学又要问了，如果我有多个进程在后台运行，那如何恢复到前台来执行呢？这时候就要用到jobs这个命令了，通过jobs这个命令，能够列出所有在后台执行的进程，那个中括号（[ ]）里面的数字就是 jobs 的代号啰 ，通过fg %number 就可以恢复指定的后台进程。<br>使用nohup让程序在远程主机后台运行。Unix/Linux下一般比如想让某个程序在后台运行，很多都是使用 &amp; 在程序结尾来让程序自动运行。但是如果终端关闭，那么程序也会被关闭。但是为了能够后台运行，那么我们就可以使用nohup这个命令，比如我们有个test.php需要在后台运行，并且希望在后台能够定期运行，那么就使用nohup：<br>    nohup /root/test.php &amp;<br>提示：<br>[~]$ appending output to nohup.out 证明运行成功，同时把程序运行的输出信息放到当前目录的 nohup.out 文件中去。<br>附：nohup命令参考 nohup 命令 用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [ &amp; ]<br>描述：nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所<br>有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 […]<br>后台运行的两个命令 &amp; 和 ctr+z<br>一开始就+“&amp;”具体方法是： [命令]空格[&amp;]<br>比如：<br>    [root@pcmxexweb etc]# find / -name xml &amp;<br>这样，这个查找程序就会在后台运行。它运行的同时不影响你干别的事情。<br>但是有的时候忘记了在命令之后加上„&amp;‟符号，又不愿意停下此命令重新改写。这是可<br>以按[ctrl+z]，把当前程序切入后台。<br>但是要注意此时在后台的这个程序是处于 Stopped 状态（注意看上面最后一行）。<br>用jobs查看下后台运行程序。<br>用fg %[编号]切回前台</p>
@@ -1119,7 +1119,7 @@ forever restartall #重启所有应用</code></pre><h2 id="输出日志和错误
           </li>
         
           <li>
-            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
           </li>
         
       </ul>
