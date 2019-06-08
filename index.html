@@ -132,6 +132,93 @@
 </article>
 
   
+    <article id="post-webpack" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/16/webpack/">webpack基本配置</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/05/16/webpack/" class="article-date">
+  <time datetime="2019-05-15T16:00:00.000Z" itemprop="datePublished">2019-05-16</time>
+</a>
+    
+    
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>打包方式有命令行和配置文件方式，主要用配置文件方式</p>
+<h1 id="配置选项"><a href="#配置选项" class="headerlink" title="配置选项"></a>配置选项</h1><ul>
+<li>externals</li>
+<li>target</li>
+<li>cache</li>
+<li>loader</li>
+<li>devServer</li>
+<li>plugins</li>
+<li>context</li>
+<li>entry</li>
+<li>output</li>
+<li>module</li>
+<li>resolve</li>
+<li>resolveLoader</li>
+</ul>
+<p>[webpack中文网配置文件说明]<a href="https://www.webpackjs.com/configuration/#%E9%80%89%E9%A1%B9" target="_blank" rel="noopener">https://www.webpackjs.com/configuration/#%E9%80%89%E9%A1%B9</a></p>
+<p>下面介绍几个常用选项含义和用法</p>
+<h2 id="context"><a href="#context" class="headerlink" title="context"></a>context</h2><p>context选项用来配置基础路径（必须为绝对路径），默认为process.cwd()，即运行webpack命令的目录。</p>
+<h2 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h2><p>entry选项用来配置要打包的入口文件，值可以是字符串、数组、对象。该选项指定的路径会相对context选项指定的路径进行查找。</p>
+<ol>
+<li>字符串<br>直接指定路径，该路径相对于context选项。<br> entry: “./entry”</li>
+<li>数组<br>路径数组，Webpack会按序打包，但是只导出最后一个文件。<br> entry: [“./entry1”, “./entry2”]</li>
+<li>对象<br>当entry值为对象时，键名为块名，可以随意指定，键值可以为字符串或数组类型。该块名可以在output选项中使用，代码示例如下：<br> {<br>   entry: {<pre><code>page1: &quot;./page1&quot;,
+page2: [&quot;./entry1&quot;, &quot;./entry2&quot;]</code></pre>   },<br>   output: {<pre><code>// 打包后输出文件名，name为entry中对应的键名</code></pre>   filename: “[name].bundle.js”<br>   }<br> }<br>以上选项配置后，运行命令在项目根目录下会生成page1.bundle.js和page2.bundle.js文件。</li>
+</ol>
+<h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><p>utput选项可用来配置输出信息：<br>output.filename<br>配置打包后的文件名，注意值不是绝对路径。我们应该通过output.path来指定输出路径，filename会相对output.path来输出，代码示例如下：<br>// 单入口示例<br>    {<br>      entry: ‘./src/app.js’,<br>      output: {<br>        filename: ‘bundle.js’,<br>        path: __dirname + ‘/build’<br>      }<br>    }<br>// 写入磁盘路径为./build/bundle.js<br>如果项目有多个入口，对于每个入口打包后的文件名我们需要保证其唯一性。Webpack提供了以下模式来动态生成输出文件名：<br>[name]，入口文件块名。<br>[hash]，每个入口打包后的hash值。<br>[chunkhash]，在使用代码分割时，异步加载的文件的hash值。<br>// 多入口示例<br>    {<br>      entry: {<br>        app: ‘./src/app.js’,<br>        search: ‘./src/search.js’<br>      },<br>      output: {<br>        filename: ‘[name].js’,<br>        // filename: ‘[hash].js’,<br>        // filename: ‘[chunkhash].js’,<br>        path: __dirname + ‘/build’<br>      }<br>    }<br>// 写入磁盘路径为./build/app.js、./build/search.js<br>output.path——打包后的文件的根目录（绝对路径）。</p>
+<h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><p>module选项用来进行模块加载相关配置。<br>module.loaders——加载器数组，当依赖文件匹配指定的test模式时，Webpack会自动调用数组中的相应加载器去处理该文件，然后返回JS格式的文件。<br>加载器是一个对象，该对象拥有以下属性：<br>test —— 正则表达式，Webpack用其去匹配相应的文件，通常用来匹配文件后缀。<br>exclude —— 不应该被loader处理的文件。<br>include —— 一个路径数组，这些路径将会被loader处理。<br>loader —— test匹配到的文件对应的加载器，值是一个加载器名字字符串，多个加载器之间用“!”分隔。<br>代码示例如下：<br>    module: {<br>      loaders: [<br>        {<br>          // 匹配jsx后缀的文件<br>          test: /.jsx$/,<br>          // include中的目录会被loader解析<br>          include: [<br>            path.resolve(<strong>dirname, “app/src”),<br>            path.resolve(</strong>dirname, “app/test”)<br>          ],<br>          // babel loader，该loader可以用来解析ES 6语法<br>          loader: “babel-loader” // 或者 “babel”， Webpack 将会自动添加 ‘-loader’<br>        }<br>      ]<br>    }</p>
+<h2 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h2><p>resolve选项用来配置依赖文件的匹配，如依赖文件别名配置、模块的查找目录、默认查找的文件后缀等。</p>
+<ol>
+<li>resolve.alias<br>该选项用来配置依赖文件的别名，值是一个对象，该对象的键是别名，值是实际路径。</li>
+<li>resolve.root<br>该选项用来指定模块的查找根路径，必须为绝对路径，值可以是路径字符串或者路径数组。若是路径数组，Webpack会依次在这些路径中查找，如果找到则终止；否则会继续在下一个路径中查找。代码示例如下：<br>// webpack.config.js<br> var path = require(‘path’);<br> // …<br> resolve: {<br>   root: [<pre><code>path.resolve(&apos;./app/modules&apos;),
+path.resolve(&apos;./vendor/modules&apos;)</code></pre>   ]<br> }</li>
+<li>resolve.modulesDirectories<br>该选项用来指定模块目录，值是一个路径数组，默认值为[“web_modules”, “node_modules”]。</li>
+</ol>
+<h2 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h2><p>evServer选项可用来配置webpack-dev-server的行为。以下代码用来指定服务的根路径：<br>    {<br>      devServer: {<br>        contentBase: “./build”,<br>    }<br>    }</p>
+<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><p>我们需要通过npm安装相关的插件，这里以WebpackBrowserPlugin为例，该插件用来在Webpack或webpack-dev-server运行完成后启动浏览器。<br>    module.exports = {<br>      …<br>      …<br>      plugins: [<br>        new WebpackBrowserPlugin()<br>      ],<br>      …<br>    }<br>插件的具体使用方式可以到插件的官方网站查询，一般会有说明如何使用。<br>下面介绍几款Webpack内置的常用插件的使用</p>
+<ol>
+<li>DefinePlugin<br>DefinePlugin插件用来替换指定变量，代码示例如下：<br>// webpack.config.js<br> var webpack = require(‘webpack’);<br> module.exports = {<br>   …<br>   …<br>   plugins: [<pre><code>new webpack.DefinePlugin({
+  VERSION: JSON.stringify(&quot;5fa3b9&quot;),
+  BROWSER_SUPPORTS_HTML5: true,
+  TWO: &quot;1+1&quot;
+})</code></pre>   ],<br>   …<br> }<br>// 待编译的文件<br> console.log(“Running App version “ + VERSION)// 编译后：console.log(“Running App version “ + “5fa3b9”)<br>if(!BROWSER_SUPPORTS_HTML5) require(“html5shiv”)// 编译后：if(!true) require(“html5shiv”)<br>var two = TWO// 编译后：var two = 1+1</li>
+<li>ProvidePlugin<br>ProvidePlugin可以自动加载当前模块依赖的其他模块并以指定别名注入到当前模块中。假如当前模块依赖jquery模块，同时我们想在模块中直接用“$”引用jQuery对象，但是不想手动require jquery模块。代码示例如下：<br>// 当前模块<br>$(“#item”)<br>此时我们只需要在Webpack配置文件中配置ProvidePlugin插件将jquery模块导出为 $ 变量即可。代码示例如下：<br>// webpack.config.js<br> var webpack = require(‘webpack’);<br> module.exports = {<br>   …<br>   …<br>   plugins: [<pre><code>// 自动引入 jquery 模块并导出为 $ 变量，使各个模块可以直接通过“$”来引用 jQuery 对象
+new webpack.ProvidePlugin({
+    $: &quot;jquery&quot;
+})</code></pre>   ],<br>   …<br> }</li>
+</ol>
+<p>需另外安装的插件</p>
+<ol start="3">
+<li>HtmlWebpackPlugin<br>使用index.html模板文件生成index.html文件且自动引入打包后的js,css文件插件</li>
+</ol>
+<p>此外还有代码压缩，打包清理等众多插件可供使用</p>
+
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-Vue-component-interaction" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -427,6 +514,65 @@ z = C</code></pre><p>因此，列表生成式也可以使用两个变量来生�
 </article>
 
   
+    <article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
+  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+    
+    
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
+var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
+imgs.forEach((el,index) =&gt; {
+  var name = &apos;&apos;;
+  if(el.content.indexOf(&apos;png&apos;) != -1){
+    name = index+&apos;.png&apos;;
+  }else{
+    name = index+&apos;.jpeg&apos;;
+  }
+  http.get(el.content,function(req,res){
+    var imgData = &apos;&apos;;
+    req.setEncoding(&apos;binary&apos;);
+    req.on(&apos;data&apos;,function(chunk){
+      imgData += chunk;
+    })
+    req.on(&apos;end&apos;,function(){
+      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
+        if(err){console.log(&apos;保存出错！&apos;)}else{
+          console.log(&apos;保存成功!&apos;)
+        }
+      })
+    })
+  })
+
+});</code></pre>
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
     <article id="post-robotframework" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -566,65 +712,6 @@ Sleep
 Variable Should Exist
 Variable Should Not Exist
 Wait Until Keyword Succeeds</code></pre>
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
-    <article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
-  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
-</a>
-    
-    
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
-var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
-imgs.forEach((el,index) =&gt; {
-  var name = &apos;&apos;;
-  if(el.content.indexOf(&apos;png&apos;) != -1){
-    name = index+&apos;.png&apos;;
-  }else{
-    name = index+&apos;.jpeg&apos;;
-  }
-  http.get(el.content,function(req,res){
-    var imgData = &apos;&apos;;
-    req.setEncoding(&apos;binary&apos;);
-    req.on(&apos;data&apos;,function(chunk){
-      imgData += chunk;
-    })
-    req.on(&apos;end&apos;,function(){
-      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
-        if(err){console.log(&apos;保存出错！&apos;)}else{
-          console.log(&apos;保存成功!&apos;)
-        }
-      })
-    })
-  })
-
-});</code></pre>
       
     </div>
     
@@ -926,54 +1013,6 @@ forever restartall #重启所有应用</code></pre><h2 id="输出日志和错误
 </article>
 
   
-    <article id="post-vue problem" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/28/vue problem/">vue scoped</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2018/09/28/vue problem/" class="article-date">
-  <time datetime="2018-09-27T16:00:00.000Z" itemprop="datePublished">2018-09-28</time>
-</a>
-    
-    
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-cloud" itemprop="articleBody">
-      
-        <p>scoped的好处、坑与解决办法<br>我们假设把使用scoped的组件叫做模块私有组件，其他的未加scoped的叫做模块一般组件。通过查看DOM结构发现：vue通过在DOM结构以及css样式上加唯一不重复的标记，以保证唯一，达到样式私有化模块化的目的。</p>
-<p>添加了scoped属性的组件，为了达到组件样式模块化，做了两个处理：</p>
-<p>给HTML的DOM节点加一个不重复data属性(形如：data-v-19fca230)来表示他的唯一性<br>在每句css选择器的末尾（编译后的生成的css语句）加一个当前组件的data属性选择器（如[data-v-2311c06a]）来私有化样式<br>如果不使用scoped如何解决样式全局污染？<br>推荐使用scoped推动组件私有化，文章所提到的不使用仅出现在已有UI库的样式覆盖上（当然人家用了scoped 那就很难办了）。<br>首先，解决组件样式全局污染，也就是我们在这里不使用scoped 覆盖了样式，那么我们在其他地方调用该组件就会被覆盖。那么我们在使用组件的时候对组件给一个类名 或者其他甄别属性（id），覆盖样式就针对该类名进行重写样式。<br>其次，解决其他样式全局污染，如果我们通过：</p>
-<pre><code>&lt;style lang=&quot;less&quot;&gt;
-    @import &quot;./test.less&quot;;
-&lt;/style&gt;123</code></pre><p>引进样式，那么不使用scoped ，”./test.less” 中的其他类名样式可能会污染全局，我这里用一个比较笨的方法处理：在模板中使用两次 标签：</p>
-<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
-    @import &quot;./test.less&quot;;
-&lt;/style&gt;
-&lt;style lang=&quot;less&quot;&gt;
-    //你的覆盖样式
-&lt;/style&gt;</code></pre><p>这样既覆盖了样式，其他样式不会被覆盖到全局(注意两个标签的顺序)。</p>
-<p>官网 vue-loader 中提到每个vue模板中可以有多个标签，所以上面的写法是没有问题的。</p>
-
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
     <article id="post-linux commd" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -1066,15 +1105,15 @@ forever restartall #重启所有应用</code></pre><h2 id="输出日志和错误
           </li>
         
           <li>
+            <a href="/2019/05/16/webpack/">webpack基本配置</a>
+          </li>
+        
+          <li>
             <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
           </li>
         
           <li>
             <a href="/2019/04/09/python/">python</a>
-          </li>
-        
-          <li>
-            <a href="/2019/03/25/robotframework/">RobotFramework</a>
           </li>
         
           <li>

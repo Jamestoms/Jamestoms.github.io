@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>webpack基本配置 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="打包方式有命令行和配置文件方式，主要用配置文件方式 配置选项 externals target cache loader devServer plugins context entry output module resolve resolveLoader  [webpack中文网配置文件说明]https://www.webpackjs.com/configuration/#%E9%80%89%E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack基本配置">
+<meta property="og:url" content="http://yoursite.com/2019/05/16/webpack/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="打包方式有命令行和配置文件方式，主要用配置文件方式 配置选项 externals target cache loader devServer plugins context entry output module resolve resolveLoader  [webpack中文网配置文件说明]https://www.webpackjs.com/configuration/#%E9%80%89%E">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T14:37:50.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack基本配置">
+<meta name="twitter:description" content="打包方式有命令行和配置文件方式，主要用配置文件方式 配置选项 externals target cache loader devServer plugins context entry output module resolve resolveLoader  [webpack中文网配置文件说明]https://www.webpackjs.com/configuration/#%E9%80%89%E">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/cat.jpg">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <script>
+  let antiquityStorage = window.sessionStorage.getItem('antiquitySessionStorage');
+  if (antiquityStorage == '' || antiquityStorage == null) {
+    var antiquityLoader = '<div id="loaderbox"><div class="loader"><div class="load-roll"><div class="load-top"></div><div class="load-right"></div><div class="load-bottom"></div></div></div></div>';
+    document.write(antiquityLoader);
+    document.body.style.overflow = 'hidden'
+  }
+  </script>
+</head>
+</html>
+<body>
+  <div id="fullpage" class="mobile-nav-right">
+    
+      <div id="wrapper" style="background-image: url(/images/bg.webp)" title="图片来自网络">
+    
+    
+      <header id="header">
+  <div id="nav-toggle" class="nav-toggle"></div>
+  <div class="head-box global-width">
+    <nav class="nav-box nav-right">
+      
+        <a class="nav-item" href="/" title>首页</a>
+      
+        <a class="nav-item" href="/archives" title>归档</a>
+      
+    </nav>
+  </div>
+</header>
+      <div id="middlecontent" title class="global-width sidebar-right">
+        <section id="main"><article id="post-webpack" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      webpack基本配置
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/05/16/webpack/" class="article-date">
+  <time datetime="2019-05-15T16:00:00.000Z" itemprop="datePublished">2019-05-16</time>
+</a>
+    
+    
+  </div>
+  
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-cloud" itemprop="articleBody">
+      
+        <p>打包方式有命令行和配置文件方式，主要用配置文件方式</p>
+<h1 id="配置选项"><a href="#配置选项" class="headerlink" title="配置选项"></a>配置选项</h1><ul>
+<li>externals</li>
+<li>target</li>
+<li>cache</li>
+<li>loader</li>
+<li>devServer</li>
+<li>plugins</li>
+<li>context</li>
+<li>entry</li>
+<li>output</li>
+<li>module</li>
+<li>resolve</li>
+<li>resolveLoader</li>
+</ul>
+<p>[webpack中文网配置文件说明]<a href="https://www.webpackjs.com/configuration/#%E9%80%89%E9%A1%B9" target="_blank" rel="noopener">https://www.webpackjs.com/configuration/#%E9%80%89%E9%A1%B9</a></p>
+<p>下面介绍几个常用选项含义和用法</p>
+<h2 id="context"><a href="#context" class="headerlink" title="context"></a>context</h2><p>context选项用来配置基础路径（必须为绝对路径），默认为process.cwd()，即运行webpack命令的目录。</p>
+<h2 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h2><p>entry选项用来配置要打包的入口文件，值可以是字符串、数组、对象。该选项指定的路径会相对context选项指定的路径进行查找。</p>
+<ol>
+<li>字符串<br>直接指定路径，该路径相对于context选项。<br> entry: “./entry”</li>
+<li>数组<br>路径数组，Webpack会按序打包，但是只导出最后一个文件。<br> entry: [“./entry1”, “./entry2”]</li>
+<li>对象<br>当entry值为对象时，键名为块名，可以随意指定，键值可以为字符串或数组类型。该块名可以在output选项中使用，代码示例如下：<br> {<br>   entry: {<pre><code>page1: &quot;./page1&quot;,
+page2: [&quot;./entry1&quot;, &quot;./entry2&quot;]</code></pre>   },<br>   output: {<pre><code>// 打包后输出文件名，name为entry中对应的键名</code></pre>   filename: “[name].bundle.js”<br>   }<br> }<br>以上选项配置后，运行命令在项目根目录下会生成page1.bundle.js和page2.bundle.js文件。</li>
+</ol>
+<h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><p>utput选项可用来配置输出信息：<br>output.filename<br>配置打包后的文件名，注意值不是绝对路径。我们应该通过output.path来指定输出路径，filename会相对output.path来输出，代码示例如下：<br>// 单入口示例<br>    {<br>      entry: ‘./src/app.js’,<br>      output: {<br>        filename: ‘bundle.js’,<br>        path: __dirname + ‘/build’<br>      }<br>    }<br>// 写入磁盘路径为./build/bundle.js<br>如果项目有多个入口，对于每个入口打包后的文件名我们需要保证其唯一性。Webpack提供了以下模式来动态生成输出文件名：<br>[name]，入口文件块名。<br>[hash]，每个入口打包后的hash值。<br>[chunkhash]，在使用代码分割时，异步加载的文件的hash值。<br>// 多入口示例<br>    {<br>      entry: {<br>        app: ‘./src/app.js’,<br>        search: ‘./src/search.js’<br>      },<br>      output: {<br>        filename: ‘[name].js’,<br>        // filename: ‘[hash].js’,<br>        // filename: ‘[chunkhash].js’,<br>        path: __dirname + ‘/build’<br>      }<br>    }<br>// 写入磁盘路径为./build/app.js、./build/search.js<br>output.path——打包后的文件的根目录（绝对路径）。</p>
+<h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><p>module选项用来进行模块加载相关配置。<br>module.loaders——加载器数组，当依赖文件匹配指定的test模式时，Webpack会自动调用数组中的相应加载器去处理该文件，然后返回JS格式的文件。<br>加载器是一个对象，该对象拥有以下属性：<br>test —— 正则表达式，Webpack用其去匹配相应的文件，通常用来匹配文件后缀。<br>exclude —— 不应该被loader处理的文件。<br>include —— 一个路径数组，这些路径将会被loader处理。<br>loader —— test匹配到的文件对应的加载器，值是一个加载器名字字符串，多个加载器之间用“!”分隔。<br>代码示例如下：<br>    module: {<br>      loaders: [<br>        {<br>          // 匹配jsx后缀的文件<br>          test: /.jsx$/,<br>          // include中的目录会被loader解析<br>          include: [<br>            path.resolve(<strong>dirname, “app/src”),<br>            path.resolve(</strong>dirname, “app/test”)<br>          ],<br>          // babel loader，该loader可以用来解析ES 6语法<br>          loader: “babel-loader” // 或者 “babel”， Webpack 将会自动添加 ‘-loader’<br>        }<br>      ]<br>    }</p>
+<h2 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h2><p>resolve选项用来配置依赖文件的匹配，如依赖文件别名配置、模块的查找目录、默认查找的文件后缀等。</p>
+<ol>
+<li>resolve.alias<br>该选项用来配置依赖文件的别名，值是一个对象，该对象的键是别名，值是实际路径。</li>
+<li>resolve.root<br>该选项用来指定模块的查找根路径，必须为绝对路径，值可以是路径字符串或者路径数组。若是路径数组，Webpack会依次在这些路径中查找，如果找到则终止；否则会继续在下一个路径中查找。代码示例如下：<br>// webpack.config.js<br> var path = require(‘path’);<br> // …<br> resolve: {<br>   root: [<pre><code>path.resolve(&apos;./app/modules&apos;),
+path.resolve(&apos;./vendor/modules&apos;)</code></pre>   ]<br> }</li>
+<li>resolve.modulesDirectories<br>该选项用来指定模块目录，值是一个路径数组，默认值为[“web_modules”, “node_modules”]。</li>
+</ol>
+<h2 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h2><p>evServer选项可用来配置webpack-dev-server的行为。以下代码用来指定服务的根路径：<br>    {<br>      devServer: {<br>        contentBase: “./build”,<br>    }<br>    }</p>
+<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><p>我们需要通过npm安装相关的插件，这里以WebpackBrowserPlugin为例，该插件用来在Webpack或webpack-dev-server运行完成后启动浏览器。<br>    module.exports = {<br>      …<br>      …<br>      plugins: [<br>        new WebpackBrowserPlugin()<br>      ],<br>      …<br>    }<br>插件的具体使用方式可以到插件的官方网站查询，一般会有说明如何使用。<br>下面介绍几款Webpack内置的常用插件的使用</p>
+<ol>
+<li>DefinePlugin<br>DefinePlugin插件用来替换指定变量，代码示例如下：<br>// webpack.config.js<br> var webpack = require(‘webpack’);<br> module.exports = {<br>   …<br>   …<br>   plugins: [<pre><code>new webpack.DefinePlugin({
+  VERSION: JSON.stringify(&quot;5fa3b9&quot;),
+  BROWSER_SUPPORTS_HTML5: true,
+  TWO: &quot;1+1&quot;
+})</code></pre>   ],<br>   …<br> }<br>// 待编译的文件<br> console.log(“Running App version “ + VERSION)// 编译后：console.log(“Running App version “ + “5fa3b9”)<br>if(!BROWSER_SUPPORTS_HTML5) require(“html5shiv”)// 编译后：if(!true) require(“html5shiv”)<br>var two = TWO// 编译后：var two = 1+1</li>
+<li>ProvidePlugin<br>ProvidePlugin可以自动加载当前模块依赖的其他模块并以指定别名注入到当前模块中。假如当前模块依赖jquery模块，同时我们想在模块中直接用“$”引用jQuery对象，但是不想手动require jquery模块。代码示例如下：<br>// 当前模块<br>$(“#item”)<br>此时我们只需要在Webpack配置文件中配置ProvidePlugin插件将jquery模块导出为 $ 变量即可。代码示例如下：<br>// webpack.config.js<br> var webpack = require(‘webpack’);<br> module.exports = {<br>   …<br>   …<br>   plugins: [<pre><code>// 自动引入 jquery 模块并导出为 $ 变量，使各个模块可以直接通过“$”来引用 jQuery 对象
+new webpack.ProvidePlugin({
+    $: &quot;jquery&quot;
+})</code></pre>   ],<br>   …<br> }</li>
+</ol>
+<p>需另外安装的插件</p>
+<ol start="3">
+<li>HtmlWebpackPlugin<br>使用index.html模板文件生成index.html文件且自动引入打包后的js,css文件插件</li>
+</ol>
+<p>此外还有代码压缩，打包清理等众多插件可供使用</p>
+
+      
+    </div>
+    
+      <footer class="article-footer">
+        完
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  <div class="article-nav-block">
+    
+      <a href="/2019/05/19/javascript/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption"></strong>
+        <div class="article-nav-title">
+          
+            Javascript
+          
+        </div>
+      </a>
+    
+  </div>
+  <div class="article-nav-block">
+    
+      <a href="/2019/05/07/Vue-component-interaction/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Vue组件交互的方式</div>
+        <strong class="article-nav-caption"></strong>
+      </a>
+    
+  </div>
+</nav>
+
+    
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'jamestoms',
+  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  oauth: {
+    client_id: '2923420e5ca69ad4ba40',
+    client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',
+  },
+})
+gitment.render('gitmentContainer')
+</script>
+
+  
+  
+</article>
+</section>
+        <aside id="sidebar">
+  
+    <div class="widget-box">
+  <div class="avatar-box">
+    <img class="avatar" src="/images/cat.jpg" title="图片来自网络">
+    <h3 class="avatar-name">
+      
+        jamestoms
+      
+    </h3>
+    <p class="avatar-slogan">
+      我只是个小前端
+    </p>
+  </div>
+</div>
+
+
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-box">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/19/javascript/">Javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/16/webpack/">webpack基本配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/Vue-component-interaction/">Vue组件交互的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/09/python/">python</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-box">
+    <h3 class="widget-title">友链</h3>
+    <div class="widget">
+      
+        <a style="display: block;" href="https://jamestoms.github.io/" title target="_blank">jamestoms</a>
+      
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  <div class="foot-box global-width">
+    &copy; 2019 John Doe &nbsp;&nbsp;
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    &nbsp;|&nbsp;主题 <a href="https://github.com/yiluyanxia/hexo-theme-antiquity">antiquity</a>
+    <br>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">不蒜子告之   阁下是第<span id="busuanzi_value_site_pv"></span>个访客</span>
+  </div>
+</footer>
+      <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script>
+if (!window.jQuery) {
+var script = document.createElement('script');
+script.src = "/js/jquery-2.0.3.min.js";
+document.body.write(script);
+}
+</script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+    </div>
+    <nav id="mobile-nav" class="mobile-nav-box">
+  <div class="mobile-nav-img mobile-nav-top"></div>
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+  <div class="mobile-nav-img  mobile-nav-bottom"></div>
+</nav>    
+  </div>
+</body>
+</html>
