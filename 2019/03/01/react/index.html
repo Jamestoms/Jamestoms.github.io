@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="jamestoms的博客">
 <meta property="og:description" content="构建react组件的三种方式： React.createClass ES6 classes 无状态函数  示例：创建button组件元素React.createClass const Button = React.createClass({   getDefaultProps(){     return {       color: &amp;apos;blue&amp;apos;,       text: &amp;a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-08T13:08:12.582Z">
+<meta property="og:updated_time" content="2019-06-08T15:54:52.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react">
 <meta name="twitter:description" content="构建react组件的三种方式： React.createClass ES6 classes 无状态函数  示例：创建button组件元素React.createClass const Button = React.createClass({   getDefaultProps(){     return {       color: &amp;apos;blue&amp;apos;,       text: &amp;a">
@@ -90,7 +90,7 @@
 
   <div class="article-inner">
     
-    <div class="article-content article-content-doorframe" itemprop="articleBody">
+    <div class="article-content article-content-mac" itemprop="articleBody">
       
         <h2 id="构建react组件的三种方式："><a href="#构建react组件的三种方式：" class="headerlink" title="构建react组件的三种方式："></a>构建react组件的三种方式：</h2><ul>
 <li>React.createClass</li>
@@ -116,20 +116,16 @@
 });</code></pre><p>当调用button组件时只需要使用<buton>,就可以被解析成React.createClass(Button)方法来创建Button实例。</buton></p>
 <p>ES6 classes</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
-　
 class Button extends Component {
   constructor(props) {
     super(props);
   }
-　
   static defaultProps = {
     color: &apos;blue&apos;,
     text: &apos;Confirm&apos;,
   };
-　
   render() {
     const { color, text } = this.props;
-
     return (
       &lt;button className={btn btn-${color}}&gt;
         &lt;em&gt;{text}&lt;/em&gt;
@@ -146,54 +142,49 @@ class Button extends Component {
 }</code></pre><p>无状态组件只传入 props 和 context 两个参数；也就是说，它不存在 state ，也没有生命周期方法，组件本身即上面两种 React 组件构建方法中的 render 方法。不过，像 propTypes 和 defaultProps 还是可以通过向方法设置静态属性来实现的。<br>在适合的情况下，我们都应该且必须使用无状态组件。无状态组件不像上述两种方法在调用时会创建新实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。</p>
 <h2 id="事件处理函数中的this绑定"><a href="#事件处理函数中的this绑定" class="headerlink" title="事件处理函数中的this绑定"></a>事件处理函数中的this绑定</h2><ul>
 <li><p>bind方法</p>
-<p>  import React, { Component } from ‘react’;<br>  　<br>  class App extends Component {</p>
+<p>  import React, { Component } from ‘react’;<br>  class App extends Component {</p>
 <pre><code>handleClick(e, arg) {
   console.log(e, arg);
-}</code></pre><p>  　 render() {</p>
-<pre><code>  // 通过bind方法实现，可以传递参数
+}
+render() {
+  // 通过bind方法实现，可以传递参数
   return &lt;button onClick={this.handleClick.bind(this, &apos;test&apos;)}&gt;Test&lt;/button&gt;;
 }</code></pre><p>  }</p>
-<p>使用双冒号语法<br>  import React, { Component } from ‘react’;<br>　
-  class App extends Component {</p>
+<p>使用双冒号语法<br>  import React, { Component } from ‘react’;<br>  class App extends Component {</p>
 <pre><code>handleClick(e) {
   console.log(e);
-}</code></pre><p>  　</p>
-<pre><code>render() {
+}
+render() {
   return &lt;button onClick={::this.handleClick}&gt;Test&lt;/button&gt;;
 }</code></pre><p>  }</p>
 </li>
 <li><p>构造器内声明<br>在组件的构造器内完成了 this 的绑定，这种绑定方式的好处在于仅需要进行一次绑定，而不需要每次调用事件监听器时去执行绑定操作：</p>
-<p>  import React, { Component } from ‘react’;<br>　
-  class App extends Component {</p>
+<p>  import React, { Component } from ‘react’;<br>  class App extends Component {</p>
 <pre><code>constructor(props) {
   super(props);
-
   thishandleClick = this.handleClick.bind(this);
-}</code></pre><p>  　</p>
-<pre><code>handleClick(e) {
+}
+handleClick(e) {
   console.log(e);
 }
-
 render() {
   return &lt;button onClick={this.handleClick}&gt;Test&lt;/button&gt;;
 }</code></pre><p>  }</p>
 </li>
 <li><p>箭头函数<br>箭头函数不仅是函数的“语法糖”，它还自动绑定了定义此函数作用域的 this ，因此我们不需要再对它使用 bind 方法。比如，以下方式就能运行：</p>
-<p>  import React, { Component } from ‘react’;<br>　
-  class App extends Component {</p>
+<p>  import React, { Component } from ‘react’;<br>  class App extends Component {</p>
 <pre><code>const handleClick = (e) =&gt; {
   console.log(e);
-};</code></pre><p>  　</p>
-<pre><code>render() {
+};
+render() {
   return &lt;button onClick={this.handleClick}&gt;Test&lt;/button&gt;;
 }</code></pre><p>  }</p>
 <p>或者</p>
-<p>  import React, { Component } from ‘react’;<br>　
-  class App extends Component {</p>
+<p>  import React, { Component } from ‘react’;<br>  class App extends Component {</p>
 <pre><code>handleClick(e) {
   console.log(e);
-}</code></pre><p>  　</p>
-<pre><code>render() {
+}
+render() {
   return &lt;button onClick={() =&gt; this.handleClick()}&gt;Test&lt;/button&gt;
 }</code></pre><p>  }</p>
 </li>
@@ -239,7 +230,7 @@ render() {
 <script>
 var gitment = new Gitment({
   owner: 'Jamestoms',
-  repo: 'https://github.com/Jamestoms/blog-comments.git',
+  repo: 'blog-comments',
   oauth: {
     client_id: '2923420e5ca69ad4ba40',
     client_secret: 'f95c5931bbe60e25ce6137fe5a64c8dfde7a584a',

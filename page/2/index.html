@@ -61,20 +61,20 @@
       <div id="middlecontent" title class="global-width sidebar-right">
         <section id="main">
   
-    <article id="post-linux commd" class="article global-container article-type-post" itemscope itemprop="blogPost">
+    <article id="post-vue problem" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/28/linux commd/">linux 命令使用记录</a>
+      <a class="article-title" href="/2018/09/28/vue problem/">vue scoped</a>
     </h1>
   
 
     </header>
   
   <div class="article-meta">
-    <a href="/2018/09/28/linux commd/" class="article-date">
+    <a href="/2018/09/28/vue problem/" class="article-date">
   <time datetime="2018-09-27T16:00:00.000Z" itemprop="datePublished">2018-09-28</time>
 </a>
     
@@ -84,10 +84,21 @@
 
   <div class="article-inner">
     
-    <div class="article-content article-content-doorframe" itemprop="articleBody">
+    <div class="article-content article-content-mac" itemprop="articleBody">
       
-        <p>后台方式启动mongodbb服务</p>
-<pre><code>mongod -f /usr/local/src/mongodb/data/cong/mongod.conf</code></pre><p>Linux中如何让命令在后台运行(切换到后台，关闭shell服务也会断开)<br>在下达的命令后面加上&amp;，就可以使该命令在后台进行工作，这样做最大的好处就是不怕被ctrl+c这个中断指令所中断。<br>那大家可能又要问了，在后台执行的程序怎么使它恢复到前台来运行呢？很简单，只用执行fg这个命令，就可以了。<br>可能有些同学又要问了，我现在已经在前台运行的命令，我能把它放到后台去运行么？当然可以了，只要执行ctrl+z就可以做到了。是不是很赞啊！<br>说到这里可能有些同学又要问了，如果我有多个进程在后台运行，那如何恢复到前台来执行呢？这时候就要用到jobs这个命令了，通过jobs这个命令，能够列出所有在后台执行的进程，那个中括号（[ ]）里面的数字就是 jobs 的代号啰 ，通过fg %number 就可以恢复指定的后台进程。<br>使用nohup让程序在远程主机后台运行。Unix/Linux下一般比如想让某个程序在后台运行，很多都是使用 &amp; 在程序结尾来让程序自动运行。但是如果终端关闭，那么程序也会被关闭。但是为了能够后台运行，那么我们就可以使用nohup这个命令，比如我们有个test.php需要在后台运行，并且希望在后台能够定期运行，那么就使用nohup：<br>    nohup /root/test.php &amp;<br>提示：<br>[~]$ appending output to nohup.out 证明运行成功，同时把程序运行的输出信息放到当前目录的 nohup.out 文件中去。<br>附：nohup命令参考 nohup 命令 用途：不挂断地运行命令。 语法：nohup Command [ Arg … ] [ &amp; ]<br>描述：nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所<br>有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 […]<br>后台运行的两个命令 &amp; 和 ctr+z<br>一开始就+“&amp;”具体方法是： [命令]空格[&amp;]<br>比如：<br>    [root@pcmxexweb etc]# find / -name xml &amp;<br>这样，这个查找程序就会在后台运行。它运行的同时不影响你干别的事情。<br>但是有的时候忘记了在命令之后加上„&amp;‟符号，又不愿意停下此命令重新改写。这是可<br>以按[ctrl+z]，把当前程序切入后台。<br>但是要注意此时在后台的这个程序是处于 Stopped 状态（注意看上面最后一行）。<br>用jobs查看下后台运行程序。<br>用fg %[编号]切回前台</p>
+        <p>scoped的好处、坑与解决办法<br>我们假设把使用scoped的组件叫做模块私有组件，其他的未加scoped的叫做模块一般组件。通过查看DOM结构发现：vue通过在DOM结构以及css样式上加唯一不重复的标记，以保证唯一，达到样式私有化模块化的目的。</p>
+<p>添加了scoped属性的组件，为了达到组件样式模块化，做了两个处理：</p>
+<p>给HTML的DOM节点加一个不重复data属性(形如：data-v-19fca230)来表示他的唯一性<br>在每句css选择器的末尾（编译后的生成的css语句）加一个当前组件的data属性选择器（如[data-v-2311c06a]）来私有化样式<br>如果不使用scoped如何解决样式全局污染？<br>推荐使用scoped推动组件私有化，文章所提到的不使用仅出现在已有UI库的样式覆盖上（当然人家用了scoped 那就很难办了）。<br>首先，解决组件样式全局污染，也就是我们在这里不使用scoped 覆盖了样式，那么我们在其他地方调用该组件就会被覆盖。那么我们在使用组件的时候对组件给一个类名 或者其他甄别属性（id），覆盖样式就针对该类名进行重写样式。<br>其次，解决其他样式全局污染，如果我们通过：</p>
+<pre><code>&lt;style lang=&quot;less&quot;&gt;
+    @import &quot;./test.less&quot;;
+&lt;/style&gt;123</code></pre><p>引进样式，那么不使用scoped ，”./test.less” 中的其他类名样式可能会污染全局，我这里用一个比较笨的方法处理：在模板中使用两次 标签：</p>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+    @import &quot;./test.less&quot;;
+&lt;/style&gt;
+&lt;style lang=&quot;less&quot;&gt;
+    //你的覆盖样式
+&lt;/style&gt;</code></pre><p>这样既覆盖了样式，其他样式不会被覆盖到全局(注意两个标签的顺序)。</p>
+<p>官网 vue-loader 中提到每个vue模板中可以有多个标签，所以上面的写法是没有问题的。</p>
 
       
     </div>
@@ -121,7 +132,7 @@
 
   <div class="article-inner">
     
-    <div class="article-content article-content-doorframe" itemprop="articleBody">
+    <div class="article-content article-content-mac" itemprop="articleBody">
       
         <p>一、添加nginx仓库<br>新建文件</p>
 <pre><code>vim /etc/yum.repos.d/nginx.repo</code></pre><p>文件内容:</p>
@@ -169,7 +180,7 @@ enabled=1</code></pre><p>安装<br>执行命令</p>
 
   <div class="article-inner">
     
-    <div class="article-content article-content-doorframe" itemprop="articleBody">
+    <div class="article-content article-content-mac" itemprop="articleBody">
       
         <p>闲着瞎写点东西，看到啥不错的就记下来，或者记录一些好的idea、学习难点……等等</p>
 <p>对象数组去重<br>jquery方法</p>
@@ -223,7 +234,7 @@ enabled=1</code></pre><p>安装<br>执行命令</p>
 
   <div class="article-inner">
     
-    <div class="article-content article-content-doorframe" itemprop="articleBody">
+    <div class="article-content article-content-mac" itemprop="articleBody">
       
         <p>想要有一个自己的博客，又不想到各类网站注册账号，于是想起来可以使用hexo+github搭建自己的博客，以下是个人搭建博客的过程步骤</p>
 <h1 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h1><ul>
