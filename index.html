@@ -516,65 +516,6 @@ z = C</code></pre><p>因此，列表生成式也可以使用两个变量来生�
 </article>
 
   
-    <article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
-  
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
-    </h1>
-  
-
-    </header>
-  
-  <div class="article-meta">
-    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
-  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
-</a>
-    
-    
-  </div>
-  
-
-  <div class="article-inner">
-    
-    <div class="article-content article-content-mac" itemprop="articleBody">
-      
-        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
-var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
-imgs.forEach((el,index) =&gt; {
-  var name = &apos;&apos;;
-  if(el.content.indexOf(&apos;png&apos;) != -1){
-    name = index+&apos;.png&apos;;
-  }else{
-    name = index+&apos;.jpeg&apos;;
-  }
-  http.get(el.content,function(req,res){
-    var imgData = &apos;&apos;;
-    req.setEncoding(&apos;binary&apos;);
-    req.on(&apos;data&apos;,function(chunk){
-      imgData += chunk;
-    })
-    req.on(&apos;end&apos;,function(){
-      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
-        if(err){console.log(&apos;保存出错！&apos;)}else{
-          console.log(&apos;保存成功!&apos;)
-        }
-      })
-    })
-  })
-
-});</code></pre>
-      
-    </div>
-    
-  </div>
-  
-  
-</article>
-
-  
     <article id="post-robotframework" class="article global-container article-type-post" itemscope itemprop="blogPost">
   
     <header class="article-header">
@@ -714,6 +655,65 @@ Sleep
 Variable Should Exist
 Variable Should Not Exist
 Wait Until Keyword Succeeds</code></pre>
+      
+    </div>
+    
+  </div>
+  
+  
+</article>
+
+  
+    <article id="post-nodejs-download-images" class="article global-container article-type-post" itemscope itemprop="blogPost">
+  
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+    </h1>
+  
+
+    </header>
+  
+  <div class="article-meta">
+    <a href="/2019/03/25/nodejs-download-images/" class="article-date">
+  <time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished">2019-03-25</time>
+</a>
+    
+    
+  </div>
+  
+
+  <div class="article-inner">
+    
+    <div class="article-content article-content-mac" itemprop="articleBody">
+      
+        <pre><code>var http = require(&apos;http&apos;),fs = require(&apos;fs&apos;);
+var imgs = require(&apos;./face_detection.json&apos;);  //保存图片地址的json文件
+imgs.forEach((el,index) =&gt; {
+  var name = &apos;&apos;;
+  if(el.content.indexOf(&apos;png&apos;) != -1){
+    name = index+&apos;.png&apos;;
+  }else{
+    name = index+&apos;.jpeg&apos;;
+  }
+  http.get(el.content,function(req,res){
+    var imgData = &apos;&apos;;
+    req.setEncoding(&apos;binary&apos;);
+    req.on(&apos;data&apos;,function(chunk){
+      imgData += chunk;
+    })
+    req.on(&apos;end&apos;,function(){
+      fs.writeFile(&apos;d:/code/test/node-downimg/images/&apos;+name,imgData,&apos;binary&apos;,function(err){
+        if(err){console.log(&apos;保存出错！&apos;)}else{
+          console.log(&apos;保存成功!&apos;)
+        }
+      })
+    })
+  })
+
+});</code></pre>
       
     </div>
     
@@ -1110,7 +1110,7 @@ forever restartall #重启所有应用</code></pre><h2 id="输出日志和错误
           </li>
         
           <li>
-            <a href="/2019/03/25/nodejs-download-images/">Javascript从json文件获取图片地址下载图片到本地</a>
+            <a href="/2019/03/25/robotframework/">RobotFramework</a>
           </li>
         
       </ul>
